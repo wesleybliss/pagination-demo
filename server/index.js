@@ -13,6 +13,9 @@ const items = []
 for (let i = 1; i < 1001; i++)
     items.push(`Item #${i}`)
 
+const randomInt = (from, to) =>
+    Math.floor((Math.random() * (to - (from + 1))) + from)
+
 app.get('/', (req, res) => {
     
     // @todo Error handling for parseInt
@@ -20,12 +23,15 @@ app.get('/', (req, res) => {
     const limit = parseInt(req.query.limit) || 10
     const offset = (page * limit)
     
-    res.json({
-        page,
-        limit,
-        total: items.length,
-        items: items.slice(offset, (offset + limit))
-    })
+    // Simulate latency
+    setTimeout(() => {
+        res.json({
+            page,
+            limit,
+            total: items.length,
+            items: items.slice(offset, (offset + limit))
+        })
+    }, randomInt(1000, 3000))
     
 })
 

@@ -1,23 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+<title></title>
+<style type="text/css">
+
+body {
+    font-family: sans-serif;
+}
+
+#items {
+    float: left;
+    width: 45%;
+    height: 400px;
+    max-height: 400px;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+}
+
+#info {
+    float: right;
+    width: 45%;
+    border: 1px solid #ccc;
+}
+
+</style>
 </head>
 <body>
 
 <div id="app">
     
-    <ul>
-        <li v-for="item in items">
+    <ul id="items">
+        <li v-for="item in getItems()">
           {{ item }}
         </li>
     </ul>
     
+    <ul id="info">
+        <li>Info</li>
+        <li>{{ getStatus() }}</li>
+    </ul>
+    
+    <br clear="all" />
+    
     <p><button type="button" @click="fetchNext">MOAR</button></p>
+    
+    <hr />
+    <div><pre><code>{{ JSON.stringify([
+        page, limit, pages, getItems()
+    ], null, 4) }}</code></pre></div>
     
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.min.js"></script>
 <script src="client.js"></script>
 
 </body>
